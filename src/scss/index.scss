@@ -2,11 +2,8 @@
 
 
 .profile{
-  width: 40%;
-  position: absolute;
-  left: 30%;
-  top: 50px;
-  z-index: 1;
+  width: 30%;
+  margin-top: -100px;
   border:5px solid white;
 }
 
@@ -19,16 +16,12 @@
   text-align: center;
 }
 
-.dropDown{
+.drop-down {
   width: 30px;
   padding-bottom : 20px;
 }
 
-.layout{
-  width: 50%;
-
-}
-.cardView{
+.card-view {
   position: relative;
   min-width: 0;
   word-wrap: break-word;
@@ -36,33 +29,42 @@
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
+
+  .list-table & {
+
+  }
+
+  .list-card & {
+
+  }
 }
 .card-body{
   padding-top: 35px;
 }
 
-.centerAround{
+.center-around {
   display: flex;
   flex-wrap: wrap;
 }
 
-.listName{
+.list-name {
   font-size: 25px;
   letter-spacing: 1px;
   flex: 2;
   order: 2;
+  padding-top: 18px;
 
 }
 
-.listAge{
+.list-age {
   font-size: 25px;
   letter-spacing: 1px;
-  padding-top: 10px;
+  padding-top: 18px;
   flex: 3;
   order: 3;
 }
 
-.listProfile{
+.list-profile {
   border: none;
   margin-bottom: 10px;
   width: 75px;
@@ -72,14 +74,21 @@
 
 }
 
-.listDrop{
+.list-drop {
   width: 50px;
   height: 50px;
   flex: 1;
   order: 4;
-
+  padding-top: 18px;
 }
 
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+}
 .switch {
   position: relative;
   display: inline-block;

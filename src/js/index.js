@@ -1,56 +1,64 @@
 import '../scss/index.scss';
+import jQuery from 'jquery';
 
-let templateCard = function (data) {
-  return [
-    `<div style="width: 50%">
-    <div class="cardView layout" >
+let templateCard = function (data, i) {
+  return `<div style="width: 50%">
+    <div class="card-view" >
     <img class="card-img-top" src="../src/img/card-bg.jpg" alt="Card Image">
     <div class="card-body center">
     <img src="../src/img/profile.svg" alt="profile photo" class="rounded-circle profile">
     <p class="card-text name">${data.name}</p>
     <p class="card-text ">${data.gender},${data.age}</p>
-    <a data-toggle="collapse" href="#seeMore" role="button"
-    aria-expanded="false" aria-controls="seeMore" >
-    <img class="dropDown " src="../src/img/view-more.svg">
-    </a> 
-    <div class="collapse" id="seeMore">
-    <p class="h5 ">Relationship</p>
-    <p class="card-text " style="">${data.friends[0].relationship}</p>
-    <p class="h5 ">Biography</p>
-    <p class="card-text ">${data.biography}</p>
+    <a data-toggle="collapse" href="#seeMore-${i}" 
+    role="button" aria-expanded="false" aria-controls=seeMore-${i}">
+    <img class="drop-down" id="seeMore-${i}" src="../src/img/view-more.svg"></a>
+    <section class="show" >
+      <p class="h5 ">Relationship</p>
+      <p class="card-text">${data.friends[0].relationship}</p>
+      <p class="h5 ">Biography</p>
+      <p class="card-text ">${data.biography}</p>
+    </section>
     </div>
     </div>
-    </div>
-    </div>`].join('');
+    </div>`;
 };
 
 let templateList = function (data) {
-  return [
-    `<ul class="list-group list-group-flush" style="width: 100%">
-    <li class="list-group-item" style="padding : 15px 0px;">
+  return `<ul class="list-group list-group-flush">
+    <li class="list-group-item">
     <div class="d-flex" >
-    <img src="../src/img/profile.svg" alt="profile photo" class="p-2 listProfile">
-    <p class="p-2 listName">${data.name}</p>
-    <p class="p-2 listAge">${data.gender},${data.age}</p>
-    <img class="listDrop p-2 " src="../src/img/view-more.svg">
-    <div class="collapse" id="seeMore">
-    <p class="h5 ">Relationship</p>
-    <p class="card-text " style="">${data.friends[0].relationship}</p>
-    <p class="h5 ">Biography</p>
-    <p class="card-text ">${data.biography}</p>
+      <img src="../src/img/profile.svg" alt="profile photo" class="p-2 list-profile">
+      <p class="list-name">${data.name}</p>
+      <p class="list-age">${data.gender},${data.age}</p>
+      <img class="list-drop" id="seeMore" src="../src/img/view-more.svg">
     </div>
-    </div>
-    </li>
-    </ul>`].join('');
+    <section>
+        <p class="h5">Relationship</p>
+        <p class="card-text " style="">${data.friends[0].relationship}</p>
+        <p class="h5">Biography</p>
+        <p class="card-text ">${data.biography}</p>
+      </section>
+    </li> 
+    </ul>`;
 };
 
 function Profile(data) {
-  let containerHtml = '';
+  let containerHtmlCard = '';
+  let containerHtmlList = '';
 
   for (let i = 0; i < data.friends.length; i++) {
-    containerHtml += templateCard(data.friends[i]);
+    containerHtmlCard += templateCard(data.friends[i], i);
+    containerHtmlList += templateList(data.friends[i], i);
   }
-  document.getElementById('peopleList').innerHTML = containerHtml;
+  jQuery('#switch').on('change', (e) => {
+    if (e.target.checked === true) {
+      document.getElementById('peopleList').innerHTML = containerHtmlCard;
+    } else {
+      document.getElementById('peopleList').innerHTML = containerHtmlList;
+
+    }
+  });
+
 }
 
 fetch('http://www.json-generator.com/api/json/get/cqHzMtkErS?indent=2')
@@ -60,3 +68,24 @@ fetch('http://www.json-generator.com/api/json/get/cqHzMtkErS?indent=2')
     Profile(res.data);
   });
 
+jQuery('#peopleList').on('click', (e) => {
+  console.log(e);
+  let section = jQuery(e.target).siblings('.section')[0];
+
+  if (section.hasClass('hide')) {
+    return (section).removeClass('hide').addClass('show');
+  }
+
+  return (section).removeClass('show').addClass('hide');
+
+});
+
+// must use in SCSS
+// jQuery('#switch').on('change', (e) => {
+//   if (e.target.checked === true) {
+//   } else {
+//
+//   }
+//   // container class += list-card - list-table
+//   // container class += list-table - list-card
+// });
