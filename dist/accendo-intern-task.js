@@ -82,7 +82,28 @@ return /******/ (function(modules) { // webpackBootstrap
 
 __webpack_require__(1);
 
-console.log('hello world!!');
+var templateCard = function templateCard(data) {
+  return ['<div style="width: 50%">\n    <div class="cardView layout" >\n    <img class="card-img-top" src="../src/img/card-bg.jpg" alt="Card Image">\n    <div class="card-body center">\n    <img src="../src/img/profile.svg" alt="profile photo" class="rounded-circle profile">\n    <p class="card-text name">' + data.name + '</p>\n    <p class="card-text ">' + data.gender + ',' + data.age + '</p>\n    <a data-toggle="collapse" href="#seeMore" role="button"\n    aria-expanded="false" aria-controls="seeMore" >\n    <img class="dropDown " src="../src/img/view-more.svg">\n    </a> \n    <div class="collapse" id="seeMore">\n    <p class="h5 ">Relationship</p>\n    <p class="card-text " style="">' + data.friends[0].relationship + '</p>\n    <p class="h5 ">Biography</p>\n    <p class="card-text ">' + data.biography + '</p>\n    </div>\n    </div>\n    </div>\n    </div>'].join('');
+};
+
+var templateList = function templateList(data) {
+  return ['<ul class="list-group list-group-flush" style="width: 100%">\n    <li class="list-group-item" style="padding : 15px 0px;">\n    <div class="d-flex" >\n    <img src="../src/img/profile.svg" alt="profile photo" class="p-2 listProfile">\n    <p class="p-2 listName">' + data.name + '</p>\n    <p class="p-2 listAge">' + data.gender + ',' + data.age + '</p>\n    <img class="listDrop p-2 " src="../src/img/view-more.svg">\n    <div class="collapse" id="seeMore">\n    <p class="h5 ">Relationship</p>\n    <p class="card-text " style="">' + data.friends[0].relationship + '</p>\n    <p class="h5 ">Biography</p>\n    <p class="card-text ">' + data.biography + '</p>\n    </div>\n    </div>\n    </li>\n    </ul>'].join('');
+};
+
+function Profile(data) {
+  var containerHtml = '';
+
+  for (var i = 0; i < data.friends.length; i++) {
+    containerHtml += templateCard(data.friends[i]);
+  }
+  document.getElementById('peopleList').innerHTML = containerHtml;
+}
+
+fetch('http://www.json-generator.com/api/json/get/cqHzMtkErS?indent=2').then(function (response) {
+  return response.json();
+}).then(function (res) {
+  Profile(res.data);
+});
 
 /***/ }),
 /* 1 */
