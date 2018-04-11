@@ -89,11 +89,11 @@ var _jquery2 = _interopRequireDefault(_jquery);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var templateCard = function templateCard(data, i) {
-  return '<div style="width: 50%">\n    <div class="card-view" >\n    <img class="card-img-top" src="../src/img/card-bg.jpg" alt="Card Image">\n    <div class="card-body center">\n    <img src="../src/img/profile.svg" alt="profile photo" class="rounded-circle profile">\n    <p class="card-text name">' + data.name + '</p>\n    <p class="card-text ">' + data.gender + ',' + data.age + '</p>\n    <a data-toggle="collapse" href="#seeMore-' + i + '" \n    role="button" aria-expanded="false" aria-controls=seeMore-' + i + '">\n    <img class="drop-down" id="seeMore-' + i + '" src="../src/img/view-more.svg"></a>\n    <section class="show" >\n      <p class="h5 ">Relationship</p>\n      <p class="card-text">' + data.friends[0].relationship + '</p>\n      <p class="h5 ">Biography</p>\n      <p class="card-text ">' + data.biography + '</p>\n    </section>\n    </div>\n    </div>\n    </div>';
+  return '<div style="width: 50%">\n    <div class="card-view" >\n    <img class="card-img-top" src="../src/img/card-bg.jpg" alt="Card Image">\n    <div class="card-body center">\n    <img src="../src/img/profile.svg" alt="profile photo" class="rounded-circle profile">\n    <p class="card-text name">' + data.name + '</p>\n    <p class="card-text ">' + data.gender + ',' + data.age + '</p>\n    <img class="drop-down" id="seeMore-' + i + '" src="../src/img/view-more.svg"></a>\n    </div>\n    <section class="hide">\n      <p class="h5 ">Relationship</p>\n      <p class="card-text">' + data.friends[0].relationship + '</p>\n      <p class="h5 ">Biography</p>\n      <p class="card-text ">' + data.biography + '</p>\n    </section>\n    </div>\n    </div>';
 };
 
-var templateList = function templateList(data) {
-  return '<ul class="list-group list-group-flush">\n    <li class="list-group-item">\n    <div class="d-flex" >\n      <img src="../src/img/profile.svg" alt="profile photo" class="p-2 list-profile">\n      <p class="list-name">' + data.name + '</p>\n      <p class="list-age">' + data.gender + ',' + data.age + '</p>\n      <img class="list-drop" id="seeMore" src="../src/img/view-more.svg">\n    </div>\n    <section>\n        <p class="h5">Relationship</p>\n        <p class="card-text " style="">' + data.friends[0].relationship + '</p>\n        <p class="h5">Biography</p>\n        <p class="card-text ">' + data.biography + '</p>\n      </section>\n    </li> \n    </ul>';
+var templateList = function templateList(data, i) {
+  return '<ul class="list-group list-group-flush">\n    <div class="list-group-item">\n    <div class="d-flex" >\n      <img src="../src/img/profile.svg" alt="profile photo" class="p-2 list-profile">\n      <p class="list-name">' + data.name + '</p>\n      <p class="list-age">' + data.gender + ',' + data.age + '</p>\n      <img class="drop-down list-drop" id="seeMore-' + i + '" src="../src/img/view-more.svg">\n    </div>\n    <section class="list-more">\n        <p class="h5">Relationship</p>\n        <p class="card-text " style="">' + data.friends[0].relationship + '</p>\n        <p class="h5">Biography</p>\n        <p class="card-text ">' + data.biography + '</p>\n      </section>\n    </div> \n    </ul>';
 };
 
 function Profile(data) {
@@ -119,9 +119,9 @@ fetch('http://www.json-generator.com/api/json/get/cqHzMtkErS?indent=2').then(fun
   Profile(res.data);
 });
 
-(0, _jquery2.default)('#peopleList').on('click', function (e) {
+(0, _jquery2.default)('#peopleList').on('click', '.drop-down', function (e) {
   console.log(e);
-  var section = (0, _jquery2.default)(e.target).siblings('.section')[0];
+  var section = (0, _jquery2.default)((0, _jquery2.default)(e.target).parents('div').children('section')[0]);
 
   if (section.hasClass('hide')) {
     return section.removeClass('hide').addClass('show');

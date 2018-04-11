@@ -46,6 +46,10 @@
   display: flex;
   flex-wrap: wrap;
 }
+.list-more{
+  order: 5;
+  flex-basis: 100%;
+}
 
 .list-name {
   font-size: 25px;
@@ -79,7 +83,6 @@
   height: 50px;
   flex: 1;
   order: 4;
-  padding-top: 18px;
 }
 
 .hide {

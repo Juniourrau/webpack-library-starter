@@ -9,36 +9,34 @@ let templateCard = function (data, i) {
     <img src="../src/img/profile.svg" alt="profile photo" class="rounded-circle profile">
     <p class="card-text name">${data.name}</p>
     <p class="card-text ">${data.gender},${data.age}</p>
-    <a data-toggle="collapse" href="#seeMore-${i}" 
-    role="button" aria-expanded="false" aria-controls=seeMore-${i}">
     <img class="drop-down" id="seeMore-${i}" src="../src/img/view-more.svg"></a>
-    <section class="show" >
+    </div>
+    <section class="hide">
       <p class="h5 ">Relationship</p>
       <p class="card-text">${data.friends[0].relationship}</p>
       <p class="h5 ">Biography</p>
       <p class="card-text ">${data.biography}</p>
     </section>
     </div>
-    </div>
     </div>`;
 };
 
-let templateList = function (data) {
+let templateList = function (data, i) {
   return `<ul class="list-group list-group-flush">
-    <li class="list-group-item">
+    <div class="list-group-item">
     <div class="d-flex" >
       <img src="../src/img/profile.svg" alt="profile photo" class="p-2 list-profile">
       <p class="list-name">${data.name}</p>
       <p class="list-age">${data.gender},${data.age}</p>
-      <img class="list-drop" id="seeMore" src="../src/img/view-more.svg">
+      <img class="drop-down list-drop" id="seeMore-${i}" src="../src/img/view-more.svg">
     </div>
-    <section>
+    <section class="list-more">
         <p class="h5">Relationship</p>
         <p class="card-text " style="">${data.friends[0].relationship}</p>
         <p class="h5">Biography</p>
         <p class="card-text ">${data.biography}</p>
       </section>
-    </li> 
+    </div> 
     </ul>`;
 };
 
@@ -68,9 +66,9 @@ fetch('http://www.json-generator.com/api/json/get/cqHzMtkErS?indent=2')
     Profile(res.data);
   });
 
-jQuery('#peopleList').on('click', (e) => {
+jQuery('#peopleList').on('click', '.drop-down', (e) => {
   console.log(e);
-  let section = jQuery(e.target).siblings('.section')[0];
+  let section = jQuery(jQuery(e.target).parents('div').children('section')[0]);
 
   if (section.hasClass('hide')) {
     return (section).removeClass('hide').addClass('show');
