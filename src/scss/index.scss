@@ -29,6 +29,7 @@
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
+  margin: 5px;
 
   .list-table & {
 
@@ -46,9 +47,17 @@
   display: flex;
   flex-wrap: wrap;
 }
+
+.list-people{
+  flex-basis:100%;
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
 .list-more{
   order: 5;
-  flex-basis: 100%;
+  padding-left: 50px;
+  padding-right: 150px;
 }
 
 .list-name {
@@ -83,6 +92,7 @@
   height: 50px;
   flex: 1;
   order: 4;
+  margin-top: 20px;
 }
 
 .hide {
@@ -91,6 +101,9 @@
 
 .show {
   display: block;
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-bottom: 50px;
 }
 .switch {
   position: relative;

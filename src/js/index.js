@@ -12,9 +12,9 @@ let templateCard = function (data, i) {
     <img class="drop-down" id="seeMore-${i}" src="../src/img/view-more.svg"></a>
     </div>
     <section class="hide">
-      <p class="h5 ">Relationship</p>
-      <p class="card-text">${data.friends[0].relationship}</p>
-      <p class="h5 ">Biography</p>
+      <p class="h5 center">Relationship</p>
+      <p class="card-text center">${data.friends[0].relationship}</p>
+      <p class="h5 center">Biography</p>
       <p class="card-text ">${data.biography}</p>
     </section>
     </div>
@@ -24,13 +24,13 @@ let templateCard = function (data, i) {
 let templateList = function (data, i) {
   return `<ul class="list-group list-group-flush">
     <div class="list-group-item">
-    <div class="d-flex" >
+    <div class="list-people">
       <img src="../src/img/profile.svg" alt="profile photo" class="p-2 list-profile">
       <p class="list-name">${data.name}</p>
       <p class="list-age">${data.gender},${data.age}</p>
       <img class="drop-down list-drop" id="seeMore-${i}" src="../src/img/view-more.svg">
     </div>
-    <section class="list-more">
+    <section class="list-more" >
         <p class="h5">Relationship</p>
         <p class="card-text " style="">${data.friends[0].relationship}</p>
         <p class="h5">Biography</p>
